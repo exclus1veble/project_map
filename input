@@ -1,8 +1,9 @@
-BOT_TOKEN = 6760778038:AAFFcnWCy8Mva3nTl0CxHJgsVBWLxw7NQgM
-ADMIN_ID = 168988543
-CHANNEL_ID = -1002018304028
-DATABASE = map
+BOT_TOKEN = token
+ADMIN_ID = ?????????
+CHANNEL_ID = -????????????? # id приватного канала, кто принят в тот канал автоматически становится администратором бота
+                            # самого бота надо сделать админом канала
+DATABASE = dbname
 USER = postgres
-PASSWORD = master
+PASSWORD = postgres
 HOST = 127.0.0.1
 PORT = 5432
