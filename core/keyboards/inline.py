@@ -3,7 +3,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 def get_map():
     builder = InlineKeyboardBuilder()
-    builder.button(text='Открыть карту 🗺', url='https://t.me/pcychobot/military_draft')
+    builder.button(text='Открыть карту 🗺', url='https://t.me/survival_map_bot/survivalmap')
     builder.button(text='Поддержать разработчиков', callback_data='support')
     builder.adjust(1)
     return builder.as_markup()
