@@ -16,7 +16,6 @@ class Request:
     async def add_event(self, time, latitude, longitude, description, photo, layer):
         connection = self.connector.connection
         async with connection:
-            # Создание таблицы, если она не существует
             await connection.execute(
                 """
                 CREATE TABLE IF NOT EXISTS events (
@@ -30,7 +29,6 @@ class Request:
                 );
                 """
             )
-            # Вставка данных в таблицу
             await connection.execute(
                 """
                 INSERT INTO events (t1me, latitude, longitude, description, photo, layer)
@@ -65,17 +63,13 @@ class Request:
             return []
 
     async def send_notification(self, message_text: str, bot: Bot):
-        message = None
-        chat_ids = []
         async with self.connector.connection as connection:
             async with connection.cursor() as cursor:
                 await cursor.execute('SELECT user_id FROM datausers')
                 async for row in cursor:
                     chat_id = row[0]
-                    chat_ids.append(chat_id)
                     try:
-                        # Store the returned Message object
-                        message = await bot.send_message(chat_id=chat_id, text=message_text, reply_markup=get_map())
+                        await bot.send_message(chat_id=chat_id, text=message_text, reply_markup=get_map())
                     except Exception as e:
                         print(f"Failed to send a message to user {chat_id}: {e}")
 
