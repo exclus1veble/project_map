@@ -1,0 +1,21 @@
+.leaflet-control-layers-base {
+            display: none;
+        }
+.leaflet-control-layers-separator {
+            display: none;
+        }
+.leaflet-control-layers-overlays {
+            display: flex;
+        }
+.leaflet-control-layers-overlays > label:nth-child(1) > span:nth-child(1) {
+            margin-right: 15px;
+        }
+.leaflet-control-layers-overlays > label:nth-child(2) > span:nth-child(1) {
+        margin-right: 15px;
+        }
+div.leaflet-top:nth-child(1) {
+            align: center;
+        }
+.leaflet-bottom:nth-child(4) {
+            display: none;
+        }
