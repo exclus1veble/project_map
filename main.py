@@ -34,7 +34,7 @@ def create_pool():
 
 
 async def start():
-    logging.basic_colorized_config(level=logging.DEBUG,
+    logging.basic_colorized_config(level=logging.INFO,
                                    format="%(asctime)s - [%(levelname)s] - %(name)s - "
                                           "(%(filename)s).%(funcName)s(%(lineno)d) - %(message)s"
                                    )
