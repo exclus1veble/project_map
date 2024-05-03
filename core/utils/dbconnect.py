@@ -7,12 +7,14 @@ class Request:
     def __init__(self, connector: psycopg_pool.AsyncConnectionPool.connection):
         self.connector = connector
 
+    # Добавляет пользователя в базу данных (если его там нет) или обновляет имя пользователя.
     async def add_user(self, user_id, user_name):
         query = (f"CREATE TABLE IF NOT EXISTS datausers (user_id BIGINT PRIMARY KEY, user_name VARCHAR(255));"
                  f"INSERT INTO datausers (user_id, user_name) VALUES ({user_id}, '{user_name}') " 
                  f"ON CONFLICT (user_id) DO UPDATE SET user_name='{user_name}'")
         await self.connector.execute(query)
 
+    # Добавляет событие в базу данных
     async def add_event(self, time, latitude, longitude, description, photo, layer):
         connection = self.connector.connection
         async with connection:
@@ -37,6 +39,7 @@ class Request:
                 (time, latitude, longitude, description, photo, layer)  # Pass parameters as a tuple
             )
 
+    # Получает список событий на текущую дату
     async def get_events(self):
         try:
             query = ("SELECT t1me, latitude, longitude, description, photo, layer FROM events WHERE DATE(t1me) = "
@@ -62,6 +65,7 @@ class Request:
             print(f"Error while fetching events: {e}")
             return []
 
+    # Отправляет уведомление о новом событии всем пользователям
     async def send_notification(self, message_text: str, bot: Bot):
         async with self.connector.connection as connection:
             async with connection.cursor() as cursor:
@@ -73,12 +77,14 @@ class Request:
                     except Exception as e:
                         print(f"Failed to send a message to user {chat_id}: {e}")
 
+    # Выводит список событий по категории
     async def fetch_events(self, layer):
         async with self.connector as conn:
             async with conn.cursor() as cursor:
                 await cursor.execute('SELECT id, description FROM events WHERE layer = %s;', (layer,))
                 return await cursor.fetchall()
 
+    # Удаляет событие по ID
     async def delete_event(self, event_id):
         async with self.connector as conn:
             async with conn.cursor() as cursor:

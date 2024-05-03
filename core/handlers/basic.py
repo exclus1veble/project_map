@@ -21,10 +21,11 @@ async def get_start(message: Message, request: Request):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             data = await response.json()
+            # Если пользователь является участником канала
             if data.get('ok') and (data.get('result', {}).get('status') in ['member', 'creator']):
                 await message.answer(f'Привет {message.from_user.username}, будь внимателен. Всё в твоих руках',
                                      reply_markup=events())
-                pass
+            # Если пользователь не является участником канала
             else:
                 await message.answer(f'Добро пожаловать! Рады Вас видеть, снова', reply_markup=get_map())
                 await request.add_user(message.from_user.id, message.from_user.first_name)
@@ -32,13 +33,15 @@ async def get_start(message: Message, request: Request):
 
 async def get_location(message: Message, state: FSMContext):
     point = Point(message.location.longitude, message.location.latitude)
+    # если точка входит в полигон
     if custom_polygon.contains(point).all():
         await state.update_data(latitude=message.location.latitude)
         await state.update_data(longitude=message.location.longitude)
         await message.answer('Вы отправили локацию.\n 📸 Добавьте фото (если есть)\n ✍️ Либо введите описание события:')
         await state.set_state(Steps.DESCRIPTION)
+    # если точка не входит в полигон
     else:
-        await message.answer('🛑 Недопустимые координаты')
+        await message.answer('🚫 Недопустимые координаты')
         await message.answer(text='🗺 Отправьте локацию события')
 
 

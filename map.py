@@ -27,7 +27,9 @@ async def update(bot: Bot, request: Request):
 
     for events in events_data:
         point = Point(events['longitude'], events['latitude'])
+        # Повторная проверка принадлежности метки к полигону (на случай если метка была добавлена в бд вручную)
         if custom_polygon.geometry.contains(point).any():
+
             location = [events['latitude'], events['longitude']]
 
             pop_up = f"""<strong>{events['time']}</strong>
@@ -43,7 +45,7 @@ async def update(bot: Bot, request: Request):
 
             diff_time = datetime.combine(date.min, current_time) - datetime.combine(date.min, event_time)
             radius, fill_opacity, fill_color = None, None, None
-            # Радиус круа
+            # Радиус и прозрачность зоны опасности меняется в зависимости от времени после создания события
             if diff_time <= timedelta(minutes=10):
                 radius = 200
                 fill_opacity = 0.9

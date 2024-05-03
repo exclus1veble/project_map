@@ -53,7 +53,7 @@ async def start():
     dp.callback_query.register(type_event, Steps.TYPE_EVENT)
     dp.message.register(get_description, F.text, Steps.DESCRIPTION)
     dp.message.register(get_photo, F.photo, Steps.DESCRIPTION)
-    dp.message.register(get_location, F.location or F.text == 'недопустимые координаты', Steps.LOCATION)
+    dp.message.register(get_location, F.location or F.text == '🚫 недопустимые координаты', Steps.LOCATION)
     dp.callback_query.register(catch_event)
     dp.message.register(get_start, Command(commands='start'))
 
