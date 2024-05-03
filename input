@@ -1,4 +1,4 @@
-BOT_TOKEN = 6760778038:AAHZjq2lOmTwDr98thUEtTGi4C6DuIlJujg
+BOT_TOKEN = 6760778038:AAGY2nCxWWbZFR53KOR2_I3QTdeptpv0G7Q
 ADMIN_ID = 168988543
 CHANNEL_ID = -1002018304028 # id приватного канала, кто принят в канал тот автоматически становится администратором бота
                             # самого бота надо сделать админом канала

@@ -23,6 +23,7 @@ async def catch_event(call: CallbackQuery, state: FSMContext):
         
     elif call.data == 'support':
         image_path = 'media/support.jpg'
+        toncoin = ''
         caption='Поддержите разработчиков USDT (TRC20)'
         await call.message.answer_photo(photo=types.FSInputFile(path=image_path), caption=caption)
     
