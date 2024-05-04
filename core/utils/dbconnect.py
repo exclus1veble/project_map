@@ -81,7 +81,7 @@ class Request:
     async def fetch_events(self, layer):
         async with self.connector as conn:
             async with conn.cursor() as cursor:
-                await cursor.execute('SELECT id, description FROM events WHERE layer = %s;', (layer,))
+                await cursor.execute("SELECT id, description FROM events WHERE layer = %s AND DATE(t1me) = CURRENT_DATE;", (layer,))
                 return await cursor.fetchall()
 
     # Удаляет событие по ID
