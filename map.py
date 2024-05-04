@@ -45,6 +45,7 @@ async def update(bot: Bot, request: Request):
 
             diff_time = datetime.combine(date.min, current_time) - datetime.combine(date.min, event_time)
             radius, fill_opacity, fill_color = None, None, None
+
             # Радиус и прозрачность зоны опасности меняется c течением времени
             if diff_time <= timedelta(minutes=10):
                 radius = 200
