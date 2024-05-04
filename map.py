@@ -87,7 +87,7 @@ async def update(bot: Bot, request: Request):
 
     Odessa_map.get_root().header.add_child(folium.Element('''
         <link rel="stylesheet" href="styles.css"/>
-        <script src="updateContent.js"></script>
+        #<script src="updateContent.js"></script>
     '''))
     Odessa_map.save('index.html')
     print('карта обновлена')
