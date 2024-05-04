@@ -13,7 +13,7 @@ desired_timezone = 'Europe/Kiev'
 async def update(bot: Bot, request: Request):
 
     Odessa_map = folium.Map(location=[46.4825, 30.7233], zoom_start=12)
-    folium.GeoJson(custom_polygon, show=False) #.add_to(Odessa_map)  если необходимо отобразить полигон на карте
+    folium.GeoJson(custom_polygon, show=False)  # .add_to(Odessa_map)  если необходимо отобразить полигон на карте
 
     tickets = folium.FeatureGroup(name='повестки').add_to(Odessa_map)
     blocks = folium.FeatureGroup(name='блокпосты').add_to(Odessa_map)
@@ -45,7 +45,7 @@ async def update(bot: Bot, request: Request):
 
             diff_time = datetime.combine(date.min, current_time) - datetime.combine(date.min, event_time)
             radius, fill_opacity, fill_color = None, None, None
-            # Радиус и прозрачность зоны опасности меняется в зависимости от времени после создания события
+            # Радиус и прозрачность зоны опасности меняется c течением времени
             if diff_time <= timedelta(minutes=10):
                 radius = 200
                 fill_opacity = 0.9
