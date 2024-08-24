@@ -12,7 +12,7 @@ desired_timezone = 'Europe/Kiev'
 
 async def update(bot: Bot, request: Request):
 
-    Odessa_map = folium.Map(location=[46.4825, 30.7233], zoom_start=12)
+    Odessa_map = folium.Map(location=[46.34660, 30.70387], zoom_start=14)
     folium.GeoJson(custom_polygon, show=False)  # .add_to(Odessa_map)  если необходимо отобразить полигон на карте
 
     tickets = folium.FeatureGroup(name='повестки').add_to(Odessa_map)
